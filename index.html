@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dairy Receipt Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <h1 class="title">अनुर्रा डेयरी फार्म</h1>
+      </header>
+
+      <section class="content">
+        <form id="receipt-form" class="form">
+          <h3>Billing Details</h3>
+
+          <label>
+            Billed To
+            <input type="text" id="billedTo" placeholder="Customer name" required />
+          </label>
+
+          <div class="row">
+            <label>
+              Date From
+              <input type="date" id="dateFrom" required />
+            </label>
+            <label>
+              Date To
+              <input type="date" id="dateTo" required />
+            </label>
+          </div>
+
+          <label>
+            No. of Days Skipped
+            <input type="number" id="daysSkipped" min="0" step="1" value="0" />
+          </label>
+
+          <div class="milk-section">
+            <p class="section-label">Milk Options (select one or both)</p>
+
+            <div class="milk-row">
+              <ul class="checkbox-list">
+                <li>
+                  <div>
+                    <input type="checkbox" id="cowEnabled" checked />
+                  </div>
+                  <div>
+                    <label for="cowEnabled">Cow</label>
+                  </div>
+                </li>
+              </ul>
+              <label>
+                Quantity (L)
+                <input
+                  type="number"
+                  id="cowQuantity"
+                  min="0"
+                  step="0.01"
+                  value="1"
+                />
+              </label>
+              <label>
+                Price (per L)
+                <input type="number" id="cowPrice" min="0" step="0.01" />
+              </label>
+            </div>
+
+            <div class="milk-row">
+              <ul class="checkbox-list">
+                <li>
+                  <div>
+                    <input type="checkbox" id="buffaloEnabled" />
+                  </div>
+                  <div>
+                    <label for="buffaloEnabled">Buffalo</label>
+                  </div>
+                </li>
+              </ul>
+              <label>
+                Quantity (L)
+                <input
+                  type="number"
+                  id="buffaloQuantity"
+                  min="0"
+                  step="0.01"
+                  value="0"
+                />
+              </label>
+              <label>
+                Price (per L)
+                <input type="number" id="buffaloPrice" min="0" step="0.01" />
+              </label>
+            </div>
+          </div>
+
+          <label>
+            Tax (%)
+            <input type="number" id="taxRate" min="0" step="0.01" value="0" />
+          </label>
+
+          <div class="actions">
+            <button type="submit" class="primary">Generate Receipt</button>
+            <button type="button" id="downloadPdf" class="secondary">
+              Download PDF
+            </button>
+          </div>
+          <p id="error" class="error" aria-live="polite"></p>
+        </form>
+
+        <div class="receipt">
+          <div class="receipt-header">
+            <h2 class="receipt-title">अनुर्रा डेयरी फार्म</h2>
+            <div class="receipt-meta-row">
+              <div>
+                <p class="label">BILLED TO:</p>
+                <p id="receipt-billed-to">-</p>
+              </div>
+              <div class="receipt-meta-right">
+                <p id="receipt-date-range">Select dates</p>
+                <p id="receipt-skipped">Skipped days: 0</p>
+              </div>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="receipt-items"></tbody>
+          </table>
+
+          <div class="totals">
+            <div class="totals-row">
+              <span>Subtotal</span>
+              <span id="receipt-subtotal">-</span>
+            </div>
+            <div class="totals-row">
+              <span>Tax</span>
+              <span id="receipt-tax">-</span>
+            </div>
+            <div class="totals-row total">
+              <span>Total</span>
+              <span id="receipt-total">-</span>
+            </div>
+          </div>
+
+          <p class="thanks">Thank you!</p>
+          <p class="thanks-note">
+            We appreciate your trust in Annura Dairy.
+          </p>
+
+          <div class="receipt-footer">
+            <div class="payment-info">
+              <p class="label">PAYMENT INFORMATION</p>
+              <p>PhonePe: 978579885</p>
+              <div class="qr-box">
+                <img
+                  src="assets/images/qr_code.jpg"
+                  alt="PhonePe QR Code"
+                  class="qr-image"
+                />
+              </div>
+              <p>Pay By: <span id="receipt-pay-by-date">-</span></p>
+            </div>
+            <div class="footer-details">
+              <p class="label">अनुर्रा डेयरी फार्म</p>
+              <p>Madhuban Nagar, Maniyar Toll Tax</p>
+              <p>Near Thakur Baba Ka Mandir</p>
+              <p>473638</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
